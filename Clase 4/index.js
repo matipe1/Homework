@@ -2,11 +2,11 @@
 
 const express = require('express');
 const app = express();
-const routeBooks = require('./routes/libros');
-const errorHandler = require('../middlewares/errorHandler');
+const booksRoute = require('./routes/libros');
+const errorHandler = require('./middlewares/errorHandler');
 
 app.use(express.json());
-app.use('/libros', routeBooks);
+app.use('/libros', booksRoute);
 app.use(errorHandler);
 
 

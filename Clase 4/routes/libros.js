@@ -17,7 +17,7 @@ route.get('/:id', (req, res, next) => {
         const book = data.find(b => b.id === parseInt(req.params.id));
         if (!book) {
             const error = new Error('Book not found');
-            error.status(404);
+            error.status = 404;
             throw error;
         }
         res.json(book);
@@ -50,7 +50,7 @@ route.put('/:id', (req, res, next) => {
 
         if (!book) {
             const error = new Error('Book not found');
-            error.status(404);
+            error.status = 404;
             throw error;
         }
         const { name, author, url } = req.body;
@@ -71,14 +71,14 @@ route.delete('/:id', (req, res, next) => {
     
         if (indexBook === -1) {
             const error = new Error('Book not found');
-            error.status(404);
+            error.status = 404;
             throw error // Misma accion que el return -> Pero se lo manda como parametro a catch
         }
         const deletedBook = data.splice(indexBook, 1);
-        res.json(deletedBook);
+        res.json(deletedBook[0]);
 
-    } catch (err) {
-        next(err);
+    } catch (error) {
+        next(error);
     }
 
 });
